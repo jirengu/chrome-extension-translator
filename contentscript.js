@@ -63,16 +63,20 @@ Panel.prototype.isShow = function() {
 
 let translateType = "none"
 let panel = new Panel()
-
+let pos = [0,0]
 
 
 
 document.onmouseup = function(e){  
+
   let str = window.getSelection().toString().trim()
   if(str === '') return
+	
+	pos = [e.pageX, e.pageY]
+	console.log(pos)
 
   if(translateType === 'select_translate') {
-  	panel.translate(str, [e.pageX, e.pageY])
+  	panel.translate(str, pos)
   }
   
 
@@ -83,12 +87,18 @@ document.onmouseup = function(e){
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-    console.log('helar...')
-    translateType = request.type
-    sendResponse({status: "ok"});
+  	console.log(request)
+    if(request.type) {
+    	console.log('from popup')
+     	translateType = request.type
+    	sendResponse({status: "ok"});   	
+    }else if(request.menuContent) {
+    	console.log('from menu')
+    	panel.translate(request.menuContent, pos)
+    	sendResponse({status: "ok"}); 
+    }
+
   })
+
 
 
