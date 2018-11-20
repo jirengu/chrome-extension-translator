@@ -11,6 +11,14 @@
 	     "run_at": "document_end"
 	   }
 	 ],
+    "browser_action": {
+      "default_icon": {                   
+        "16": "images/get_started16.png",                   
+        "32": "images/get_started32.png"            
+      },
+      "default_title": "划词翻译",      
+      "default_popup": "popup.html"        
+    },
     "icons": {
       "16": "images/get_started16.png",
       "32": "images/get_started32.png",
