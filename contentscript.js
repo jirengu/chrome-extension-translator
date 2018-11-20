@@ -32,8 +32,13 @@ Panel.prototype.moveTo = function(posX, posY) {
 	this.container.style.top = posY + 'px'
 } 
 
-Panel.prototype.translate = function(rawStr) {
+Panel.prototype.translate = function(rawStr, pos) {
+	chrome.storage.sync.get(['type'], function(result) {
+          console.log('Value currently is ' + result.key);
+   });
 	this.source.innerText = rawStr
+	this.moveTo(pos[0], pos[1])
+	this.show()
 	fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh&dt=t&q=${rawStr}`)
 		.then(res => res.json())
 		.then(result => {
@@ -56,20 +61,34 @@ Panel.prototype.isShow = function() {
 }
 
 
+let translateType = "none"
 let panel = new Panel()
+
+
 
 
 document.onmouseup = function(e){  
   let str = window.getSelection().toString().trim()
   if(str === '') return
 
-  panel.translate(str)
-	panel.moveTo(e.pageX, e.pageY)
-	panel.show()
+  if(translateType === 'select_translate') {
+  	panel.translate(str, [e.pageX, e.pageY])
+  }
+  
+
   // console.log(str)
   // console.log(e.pageX, e.pageY)
   // window.ee = e
 } 
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    console.log('helar...')
+    translateType = request.type
+    sendResponse({status: "ok"});
+  })
 
 

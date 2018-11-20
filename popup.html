@@ -3,18 +3,10 @@
 	<meta charset="utf-8">
 	<style type="text/css">
 		.container {
-			width: 150px;
+			width: 180px;
 		}
 		h1 {
 			font-size: 18px;
-		}
-		.status {
-			font-size: .8em;
-			color: #666;
-		}
-		.status.active {
-			color: green;
-			font-weight: bold;
 		}
 	</style>
 </head>
@@ -22,7 +14,13 @@
 <body>
 	<div class="container">
 		<h1>划词翻译</h1>
-		<p>是否开启: <input id="checkbox" type="checkbox"> <span class="status">未开启</span></p>
+		<p>是否开启: 
+			<select id="select">
+				<option value="none">不开启翻译</option>
+				<option value="select_translate">划词翻译</option>
+				<option value="menu_translate">右键菜单翻译</option>
+			</select>
+		</p>
 	</div>
 
 	<script src="popup.js"></script>
