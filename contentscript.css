@@ -1,0 +1,29 @@
+#translate-panel {
+	background: #fff;
+	width: 200px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  position: absolute;
+  display: none;
+}
+
+#translate-panel h1 {
+	font-size: 20px;
+	background: #eee;
+  margin: 0;
+  padding: 10px;
+}
+
+#translate-panel .close {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+#translate-panel main {
+	margin: 0;
+  padding: 10px;
+  font-size: 16px;
+}
+
