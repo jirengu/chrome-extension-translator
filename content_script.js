@@ -59,11 +59,21 @@ Panel.prototype.isShow = function() {
 
 
 let panel = new Panel()
+let panelSwitch = 'off'
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+  	console.log('i am content script, i hear message')
+    if (request.switch) {
+    	panelSwitch = request.switch
+    	sendResponse({status: "ok"});
+    }
+  })
 
 document.onmouseup = function(e){  
   let str = window.getSelection().toString().trim()
   if(str === '') return
+  if(panelSwitch === 'off') return
 
   panel.translate(str)
 	panel.moveTo(e.pageX, e.pageY)
