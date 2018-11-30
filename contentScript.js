@@ -54,12 +54,34 @@ Panel.prototype.setPos = function(pos) {
 }
 
 let panel = new Panel()
+let panelSwitch = 'off'
+
+chrome.storage.sync.get(['switch'], function(result) {
+  console.log('Value currently is ' + result.switch)
+  if(result.switch) {
+  	panelSwitch = result.switch
+  }
+})
 
 
 
 document.onclick = function(e) {
 	var selectStr = window.getSelection().toString().trim()
 	if(selectStr === '') return
+	if(panelSwitch === 'off') return
 	console.log(e)
 	panel.translate(selectStr, {x: e.clientX, y: e.clientY})
 }
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.switch) {
+    	panelSwitch = request.switch
+      sendResponse('ok')
+    }
+  })
+
+
