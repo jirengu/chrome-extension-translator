@@ -1,7 +1,7 @@
   {
-    "name": "Getting Started Example",
+    "name": "饥人谷翻译",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "一款超简洁好用的多语言划词翻译工具",
     "manifest_version": 2,
     "permissions": [
       "activeTab",
@@ -22,17 +22,18 @@
      ],
       "browser_action": {
         "default_icon": {                    
-          "16": "images/get_started16.png",
-          "32": "images/get_started32.png",
-          "48": "images/get_started48.png"          
+          "16": "images/icon16.png",
+          "32": "images/icon32.png",
+          "48": "images/icon48.png"          
         },
-        "default_title": "小谷翻译",      
+        "default_title": "饥人谷翻译",      
         "default_popup": "popup.html"        
       },
+       "options_page": "options.html",
     "icons": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png",
-      "48": "images/get_started48.png",
-      "128": "images/get_started128.png"
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
     }
   }
